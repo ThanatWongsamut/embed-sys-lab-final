@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "plugins": ["prettier", "@typescript-eslint"],
+  "rules": {
+    "react/jsx-pascal-case": [1],
+    "react/jsx-indent": [2, 2, { "indentLogicalExpressions": true }],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/ban-ts-comment": "off"
+  }
+}
