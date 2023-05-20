@@ -15,19 +15,19 @@
 
 - Website
 
-  - Initial nextjs project
+  - ~~Initial nextjs project~~
   - Design website
   - Making website layout
   - Connect to Firebase
 
 - NodeMCU
 
-  - Initial NodeMCU project
-  - Connect to Wifi
-  - Connect to Firebase
+  - ~~Initial NodeMCU project~~
+  - ~~Connect to Wifi~~
+  - ~~Connect to Firebase~~
   - Communicate with Firebase
-    - Read data
-    - Write data
+    - ~~Read data~~
+    - ~~Write data~~
     - Listening data changing
   - Communicate between STM32
     - Send
@@ -37,7 +37,7 @@
 
 - STM32
 
-  - Initial STM32 project
+  - ~~Initial STM32 project~~
   - Read sensor
     - DHT11
     - Soil moisture
