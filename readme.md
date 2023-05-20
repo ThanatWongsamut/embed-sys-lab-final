@@ -10,6 +10,44 @@
 
 <br>
 <br>
+
+# Task lists
+
+- Website
+
+  - Initial nextjs project
+  - Design website
+  - Making website layout
+  - Connect to Firebase
+
+- NodeMCU
+
+  - Initial NodeMCU project
+  - Connect to Wifi
+  - Connect to Firebase
+  - Communicate with Firebase
+    - Read data
+    - Write data
+    - Listening data changing
+  - Communicate between STM32
+    - Send
+    - Recieve
+    - Send custom command to NodeMCU
+    - Recieve sensor data from STM32
+
+- STM32
+
+  - Initial STM32 project
+  - Read sensor
+    - DHT11
+    - Soil moisture
+    - LDR
+  - Communicate between NodeMCU
+    - Recieve
+    - Send
+    - Pack data and send
+    - Handle other commands
+
 <br>
 <br>
 
