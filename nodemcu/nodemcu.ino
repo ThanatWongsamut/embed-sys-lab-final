@@ -11,6 +11,10 @@ FirebaseData fbdo;
 FirebaseAuth auth;
 FirebaseConfig config;
 
+// Counter
+unsigned long sendDataPrevMillis = 0;
+unsigned long count = 0;
+
 void setup()
 {
   // Start serial
@@ -48,4 +52,11 @@ void setup()
 
 void loop()
 {
+  if (Firebase.ready() && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0)) {
+    sendDataPrevMillis = millis();
+
+    Serial.printf("Set int... %s\n", Firebase.RTDB.setInt(&fbdo, F("/test/int"), count) ? "ok" : fbdo.errorReason().c_str());
+
+    count++;
+  }
 }
