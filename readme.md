@@ -16,9 +16,9 @@
 - Website
 
   - ~~Initial nextjs project~~
-  - Design website
-  - Making website layout
-  - Connect to Firebase
+  - ~~Design website~~
+  - ~~Making website layout~~
+  - ~~Connect to Firebase~~
 
 - NodeMCU
 
