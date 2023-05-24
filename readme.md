@@ -42,6 +42,7 @@
     - ~~DHT11~~
     - ~~Soil moisture~~
     - ~~LDR~~
+  - Control Pump
   - Communicate between NodeMCU
     - Recieve
     - Send
