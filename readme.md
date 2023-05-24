@@ -38,10 +38,10 @@
 - STM32
 
   - ~~Initial STM32 project~~
-  - Read sensor
-    - DHT11
-    - Soil moisture
-    - LDR
+  - ~~Read sensor~~
+    - ~~DHT11~~
+    - ~~Soil moisture~~
+    - ~~LDR~~
   - Communicate between NodeMCU
     - Recieve
     - Send
