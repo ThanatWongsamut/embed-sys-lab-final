@@ -12,6 +12,14 @@
 
 ![circuit image](./fig//circuit.png)
 
+# Author
+
+Thanat Wongsamut([@ThanatWonsamut](https://github.com/ThanatWonsamut))
+
+Punyaphat Surakiatkamjorn([@punyaphatsura](https://github.com/punyaphatsura))
+
+Thanakorn Suthamkasem([@thanakornnemo](https://github.com/thanakornnemo))
+
 <br>
 <br>
 
