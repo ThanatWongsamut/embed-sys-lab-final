@@ -198,8 +198,8 @@ export default function Home() {
                 <div className='w-40 h-40 bg-white  rounded-full justify-center items-center pt-5 ' style={{boxShadow: '6px 6px 10px -1px rgba(0,0,0,0.15)'}}>
                   {/* <Image src={Sun} alt={''} className='w-10 mx-auto'></Image> */}
                   <div className='text-center font-bold text-lg'>Sun light</div>
-                  <div className='text-center font-extrabold text-5xl text-red-500'>{sunlight ? sunlight  : ''}</div>
-                  <div className='text-center font-bold text-5xl text-red-500'>{sunlight ?  'lux' : ''}</div>
+                  <div className='text-center font-extrabold text-5xl text-red-500'>{sunlight ? sunlight  : '0'}</div>
+                  <div className='text-center font-bold text-5xl text-red-500'>lux</div>
                 </div>
               </div>
             </div>
