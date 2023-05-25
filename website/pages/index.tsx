@@ -17,7 +17,7 @@ export default function Home() {
   const [disSoilMois,setDisSoilMois] = useState<number>(440)
   const [disAirHu,setDisAirHu] = useState<number>(440)
   const [temperature,setTemperature] = useState<String>()
-  const [sunlight,setSunlight] = useState<String>()
+  const [sunlight,setSunlight] = useState<number>()
   const [status,setStatus] = useState<number>(0)
 
   const handleButtonClick = () =>{
@@ -41,31 +41,30 @@ export default function Home() {
     const Ref = ref(database, 'status')
     onValue(Ref, (snapshot) => {
       const data = snapshot.val()
-      status = data.status
+      status = data
 });
     if(status === 0){
       setStatus(1)
       set(ref(database, 'last_watering'), {
       timestamp: today.getTime(),
       });
-      set(ref(database, 'status'), {
-      status: 1,
-      });
-      const resolveAfter5Sec = new Promise(resolve => setTimeout(resolve, 5000));
+      set(ref(database, 'status'), 1);
+      const resolveAfter15Sec = new Promise(resolve => setTimeout(resolve, 15000));
       toast.promise(
-      resolveAfter5Sec,
-        {
-          pending: 'Watering, Please wait',
-          success: {render(){return 'Watering successful'}, 
-            theme:'colored',
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-          },
-          // error: 'Somethings went wrong'
-        }
+        resolveAfter15Sec,
+          {
+            pending: 'Watering, Please wait',
+            success: {render(){return 'Watering successful'}, 
+              theme:'colored',
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+              pauseOnFocusLoss: false,
+            },
+            // error: 'Somethings went wrong'
+          }
       )
     }
   }
@@ -89,7 +88,7 @@ export default function Home() {
     const unsub1 = onValue(Ref, (snapshot) => {
       const data = snapshot.val()
       console.log(data)
-      setSunlight(data.light)
+      setSunlight(parseInt(data.light))
       setTemperature(data.air_temp.toFixed(1))
       setSoilMois(data.soil_humid > 1 ? 1 : data.soil_humid)
       setAirHu(data.air_humid > 1 ? 1 : data.air_humid)

@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <string.h>
 
 /* USER CODE END Includes */
 
@@ -72,6 +73,8 @@ static void MX_USART1_UART_Init(void);
 #define REF_RESISTANCE
 
 float SOIL_HUMID, LIGHT;
+int RAW_LDR_ADC = 0;
+int RAW_SOIL_ADC = 0;
 
 uint8_t RHI, RHD, TCI, TCD, SUM;
 uint32_t pMillis, cMillis;
@@ -79,11 +82,20 @@ uint8_t tCelsius = 0;
 float tFahrenheit = 0;
 uint8_t RH = 0;
 
+char Rx_data[] = "0";
+char CLR[] = "";
+
 void microDelay(uint16_t delay) {
 	__HAL_TIM_SET_COUNTER(&htim1, 0);
 	int counter = 0;
 	while (counter < delay) {
 		counter = __HAL_TIM_GET_COUNTER(&htim1);
+	}
+}
+
+void milliDelay(uint16_t delay) {
+	for (int i = 0; i < delay; i++) {
+		microDelay(1000);
 	}
 }
 
@@ -199,6 +211,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 	HAL_TIM_Base_Start(&htim1);
+	HAL_UART_Receive_IT(&huart1, Rx_data, 1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -211,7 +224,6 @@ int main(void)
 
 
 		// Reading Soil Moisture
-		int RAW_SOIL_ADC = 0;
 		SET_ADC_READING_SOIL();
 		HAL_ADC_Start(&hadc1);
 		if (HAL_ADC_PollForConversion(&hadc1, 1000) == HAL_OK) {
@@ -225,7 +237,6 @@ int main(void)
 		HAL_ADC_Stop(&hadc1);
 
 		// Reading LDR
-		int RAW_LDR_ADC = 0;
 		SET_ADC_READING_LIGHT();
 		HAL_ADC_Start(&hadc1);
 		if (HAL_ADC_PollForConversion(&hadc1, 1000) == HAL_OK) {
@@ -257,11 +268,11 @@ int main(void)
 			}
 		}
 
-		char out[80] = "";
-		sprintf(out, "[%u,%u,%.2f,%.2f]\n\r", tCelsius, RH, SOIL_HUMID, RAW_SOIL_ADC, LIGHT, RAW_LDR_ADC);
-
-		HAL_UART_Transmit(&huart1, out, strlen(out), 100);
-		HAL_UART_Transmit(&huart2, out, strlen(out), 100);
+//		char out[80] = "";
+//		sprintf(out, "[%u,%u,%.2f,%.2f]\n\r", tCelsius, RH, SOIL_HUMID, RAW_SOIL_ADC, LIGHT, RAW_LDR_ADC);
+//
+//		HAL_UART_Transmit(&huart1, out, strlen(out), 100);
+//		HAL_UART_Transmit(&huart2, out, strlen(out), 100);
 		HAL_Delay(1000);
 	}
   /* USER CODE END 3 */
@@ -506,6 +517,28 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+//	HAL_UART_Transmit(&huart2, Rx_data, strlen(Rx_data), 100);
+	if(Rx_data[0] == '1'){
+		char out[80] = "";
+		sprintf(out, "[%u,%u,%.2f,%.2f]\n\r", tCelsius, RH, SOIL_HUMID, LIGHT);
+
+		HAL_UART_Transmit(&huart1, out, strlen(out), 100);
+		HAL_UART_Transmit(&huart2, out, strlen(out), 100);
+	}
+	else if(Rx_data[0] == '2'){
+		char start[] = "Watering\n\r";
+		char finished[] = "Water Success\n\r";
+		HAL_UART_Transmit(&huart2, start, strlen(start), 100);
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_8);
+		milliDelay(3000);
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_8);
+		HAL_UART_Transmit(&huart2, finished, strlen(finished), 100);
+	}
+	Rx_data[0] = '0';
+	HAL_UART_Receive_IT(&huart1, Rx_data, sizeof(Rx_data));
+}
 
 /* USER CODE END 4 */
 
