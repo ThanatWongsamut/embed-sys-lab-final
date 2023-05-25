@@ -258,7 +258,7 @@ int main(void)
 		}
 
 		char out[80] = "";
-		sprintf(out, "Temp: %u, Air Humid: %u, Soil Humid: %.2f:%d, Light: %.2f,%d|\n\r", tCelsius, RH, SOIL_HUMID, RAW_SOIL_ADC, LIGHT, RAW_LDR_ADC);
+		sprintf(out, "[%u,%u,%.2f,%.2f]\n\r", tCelsius, RH, SOIL_HUMID, RAW_SOIL_ADC, LIGHT, RAW_LDR_ADC);
 
 		HAL_UART_Transmit(&huart1, out, strlen(out), 100);
 		HAL_UART_Transmit(&huart2, out, strlen(out), 100);
@@ -350,24 +350,6 @@ static void MX_ADC1_Init(void)
     Error_Handler();
   }
 
-//  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-//  */
-//  sConfig.Channel = ADC_CHANNEL_0;
-//  sConfig.Rank = 1;
-//  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-//  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
-//
-//  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-//  */
-//  sConfig.Channel = ADC_CHANNEL_1;
-//  sConfig.Rank = 2;
-//  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
   /* USER CODE BEGIN ADC1_Init 2 */
 
   /* USER CODE END ADC1_Init 2 */
