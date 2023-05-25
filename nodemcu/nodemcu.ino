@@ -3,6 +3,7 @@
 #include "addons/TokenHelper.h"
 #include "addons/RTDBHelper.h"
 #include "time.h"
+#include <SoftwareSerial.h>
 
 #include "WifiCredential.h"
 #include "FirebaseCredential.h"
@@ -32,6 +33,8 @@ int soilHumid;
 int timestamp;
 
 const char* ntpServer = "pool.ntp.org";
+
+SoftwareSerial comm(5, 6);
 
 unsigned long getTime() {
   time_t now;
@@ -85,8 +88,11 @@ void initialFirebase() {
 
 void setup()
 {
-  // Start serial
+  // Start USB serial
   Serial.begin(9600);
+  // Start communicate with STM32
+  comm.begin(115200);
+
 
   initialWifi();
   initialTime();
@@ -95,24 +101,30 @@ void setup()
 
 void loop()
 {
-  if (Firebase.ready() && (millis() - sendDataPrevMillis > timerDelay || sendDataPrevMillis == 0)) {
-    sendDataPrevMillis = millis();
-
-    //Get current timestamp
-    timestamp = getTime();
-    Serial.print("time: ");
-    Serial.println(timestamp);
-
-    airHumid = rand();
-    airTemp = rand();
-    light = rand();
-    soilHumid = rand();
-
-    json.set(airHumidPath.c_str(), String(airHumid));
-    json.set(airTempPath.c_str(), String(airTemp));
-    json.set(lightPath.c_str(), String(light));
-    json.set(soilHumidPath.c_str(), String(soilHumid));
-    json.set(timestampPath.c_str(), String(timestamp));
-    Serial.printf("Set json... %s\n", Firebase.RTDB.setJSON(&fbdo, "/", &json) ? "ok" : fbdo.errorReason().c_str());
+  char buffer[80];
+  if(comm.available()) {
+    comm.readBytesUntil('\n', buffer, 80);
+    Serial.println(buffer)
   }
+
+  // if (Firebase.ready() && (millis() - sendDataPrevMillis > timerDelay || sendDataPrevMillis == 0)) {
+  //   sendDataPrevMillis = millis();
+
+  //   //Get current timestamp
+  //   timestamp = getTime();
+  //   Serial.print("time: ");
+  //   Serial.println(timestamp);
+
+  //   airHumid = rand();
+  //   airTemp = rand();
+  //   light = rand();
+  //   soilHumid = rand();
+
+  //   json.set(airHumidPath.c_str(), String(airHumid));
+  //   json.set(airTempPath.c_str(), String(airTemp));
+  //   json.set(lightPath.c_str(), String(light));
+  //   json.set(soilHumidPath.c_str(), String(soilHumid));
+  //   json.set(timestampPath.c_str(), String(timestamp));
+  //   Serial.printf("Set json... %s\n", Firebase.RTDB.setJSON(&fbdo, "/", &json) ? "ok" : fbdo.errorReason().c_str());
+  // }
 }
