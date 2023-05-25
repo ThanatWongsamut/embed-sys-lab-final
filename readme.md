@@ -8,6 +8,10 @@
 
 - [Click here for STM32](#stm32)
 
+# Our Circuit and Connection
+
+![circuit image](./fig//circuit.png)
+
 <br>
 <br>
 
@@ -28,12 +32,12 @@
   - Communicate with Firebase
     - ~~Read data~~
     - ~~Write data~~
-    - Listening data changing
+    - ~~Listening data changing~~
   - Communicate between STM32
-    - Send
-    - Recieve
-    - Send custom command to NodeMCU
-    - Recieve sensor data from STM32
+    - ~~Send~~
+    - ~~Recieve~~
+    - ~~Send custom command to NodeMCU~~
+    - ~~Recieve sensor data from STM32~~
 
 - STM32
 
@@ -42,12 +46,12 @@
     - ~~DHT11~~
     - ~~Soil moisture~~
     - ~~LDR~~
-  - Control Pump
+  - ~~Control Pump~~
   - Communicate between NodeMCU
-    - Recieve
-    - Send
-    - Pack data and send
-    - Handle other commands
+    - ~~Recieve~~
+    - ~~Send~~
+    - ~~Pack data and send~~
+    - ~~Handle other commands~~
 
 <br>
 <br>
