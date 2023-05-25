@@ -258,6 +258,8 @@ int main(void) {
 
 		char out[80] = "";
 		sprintf(out, "Temp: %u, Air Humid: %u, Soil Humid: %.2f:%d, Light: %.2f,%d|\n\r", tCelsius, RH, SOIL_HUMID, RAW_SOIL_ADC, LIGHT, RAW_LDR_ADC);
+
+		HAL_UART_Transmit(&huart1, out, strlen(out), 100);
 		HAL_UART_Transmit(&huart2, out, strlen(out), 100);
 		HAL_Delay(1000);
 	}
