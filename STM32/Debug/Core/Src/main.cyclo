@@ -4,10 +4,10 @@ main.c:101:6:SET_ADC_READING_LIGHT	2
 main.c:112:9:DHT11_Start	5
 main.c:143:9:DHT11_Read	7
 main.c:172:5:main	6
-main.c:273:6:SystemClock_Config	3
-main.c:317:13:MX_ADC1_Init	2
-main.c:374:13:MX_TIM1_Init	4
-main.c:417:13:MX_USART1_UART_Init	2
-main.c:448:13:MX_USART2_UART_Init	2
-main.c:479:13:MX_GPIO_Init	1
-main.c:518:6:Error_Handler	1
+main.c:274:6:SystemClock_Config	3
+main.c:321:13:MX_ADC1_Init	2
+main.c:382:13:MX_TIM1_Init	4
+main.c:428:13:MX_USART1_UART_Init	2
+main.c:461:13:MX_USART2_UART_Init	2
+main.c:494:13:MX_GPIO_Init	1
+main.c:534:6:Error_Handler	1
